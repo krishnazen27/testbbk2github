@@ -4,4 +4,4 @@ pipelines:
   default:
     - step:
         script:
-          - git push --mirror git@github.com:krishnazen27/testbbk2github.git
+          - git push --mirror https://github.com/krishnazen27/testbbk2github.git
