@@ -5,6 +5,7 @@ on:
     branches:
       - Develop
       - 'releases/**'
+      - 'demo-*'
 
 jobs:
   test_schedule:
