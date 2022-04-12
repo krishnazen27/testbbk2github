@@ -1,3 +1,5 @@
+name: sonarqube-scan
+
 on:
   push:
     branches:
@@ -10,3 +12,16 @@ jobs:
     steps:
       - name: Print the input tag to STDOUT
         run: echo  The tags are ${{ github.event.inputs.tags }}
+        
+    container:
+        # use sonarqubes latest image from the docker hub
+        image: sonarsource/sonar-scanner-cli:latest
+        credentials:
+        # the docker hub user name, even a free account is sufficient to pull from docker but we do not recommend anonymous pulling.
+          username: rameshjaagi
+        # the docker hub token is the user's docker hub password and is used as-is (ie. no base64 encoding)
+          password: vlsidesign
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
