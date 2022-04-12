@@ -1,0 +1,12 @@
+on:
+  push:
+    branches:
+      - Develop
+      - 'releases/**'
+
+jobs:
+  test_schedule:
+    runs-on: self-hosted
+    steps:
+      - name: Print the input tag to STDOUT
+        run: echo  The tags are ${{ github.event.inputs.tags }}
