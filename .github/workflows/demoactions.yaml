@@ -10,4 +10,3 @@ jobs:
     steps:
       - name: Print the input tag to STDOUT
         run: echo  The tags are ${{ github.event.inputs.tags }}
-        run: pwd
