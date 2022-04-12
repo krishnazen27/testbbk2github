@@ -4,4 +4,4 @@ pipelines:
   default:
     - step:
         script:
-          - git push --force origin git@github.com:krishnazen27/testbbk2github.git
+          - git push --force git@github.com:krishnazen27/testbbk2github.git
