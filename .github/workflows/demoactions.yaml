@@ -36,8 +36,4 @@ jobs:
       # Runs the commands to load the sanofi server certificate as trusted and executes the sonar scan
       - name: Run a multi-line script
         run: |
-          apk add openssl
-          mkdir /tmp/cert
-          openssl s_client -showcerts -connect ${{ env.SONAR_HOST_FQN }}:443 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/cert/chain-certificate.crt
-          keytool -cacerts -storepass changeit -noprompt -trustcacerts -importcert -alias sanofi_chain_bundle -file /tmp/cert/chain-certificate.crt
-          sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
+           sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }}
