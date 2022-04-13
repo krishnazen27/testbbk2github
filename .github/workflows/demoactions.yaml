@@ -38,4 +38,4 @@ jobs:
         run: |
           pwd
           ls -la
-          sonar-scanner -Dsonar.projectKey=demo-icc -Dsonar.sources=. -Dsonar.host.url=http://54.206.93.64:9000 -Dsonar.login=2b84d60caeaaf7d7b4c02e7f51ace39be772aff3
+          sonar-scanner -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.sources=. -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_TOKEN} -Dsonar.branch.name=$CI_COMMIT_BRANCH
