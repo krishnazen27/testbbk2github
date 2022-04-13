@@ -37,4 +37,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           pwd
+          ls -la
           sonar-scanner -Dsonar.projectKey=demo-icc -Dsonar.sources=. -Dsonar.host.url=http://54.206.93.64:9000 -Dsonar.login=2b84d60caeaaf7d7b4c02e7f51ace39be772aff3
