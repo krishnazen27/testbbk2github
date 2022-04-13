@@ -23,9 +23,3 @@ jobs:
         # the docker hub token is the user's docker hub password and is used as-is (ie. no base64 encoding)
           password: vlsidesign
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-
-      # Runs the commands to load the sanofi server certificate as trusted and executes the sonar scan
-      - name: Run a multi-line script
-        run: |
-          sonar-scanner -Dsonar.projectKey=demo-icc -Dsonar.sources=. -Dsonar.host.url=http://54.206.93.64:9000 -Dsonar.login=2b84d60caeaaf7d7b4c02e7f51ace39be772aff
