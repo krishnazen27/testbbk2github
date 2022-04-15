@@ -6,14 +6,20 @@ on:
       - Develop
       - 'releases/**'
       - 'demo-*'
-
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test_schedule:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: self-hosted
-    steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ github.event.inputs.tags }}
-        
+    env:
+      SONAR_HOST_FQN: ec2-54-206-93-64.ap-southeast-2.compute.amazonaws.com
+      SONAR_HOST_URL: "http://ec2-54-206-93-64.ap-southeast-2.compute.amazonaws.com:9000/"
+      SONAR_PROJECT_KEY: demo-icc
+      #SONAR_USER_HOME: "${{ env.CI_PROJECT_DIR }}/.sonar"  # Defines the location of the analysis task cache
+      GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+      SONAR_TOKEN: 2b84d60caeaaf7d7b4c02e7f51ace39be772aff3 # Set this as a secret for your scanner to use.
+
     container:
         # use sonarqubes latest image from the docker hub
         image: sonarsource/sonar-scanner-cli:latest
@@ -23,3 +29,13 @@ jobs:
         # the docker hub token is the user's docker hub password and is used as-is (ie. no base64 encoding)
           password: vlsidesign
     # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs the commands to load the sanofi server certificate as trusted and executes the sonar scan
+      - name: Run a multi-line script
+        run: |
+          pwd
+          ls -la
+          sonar-scanner -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.sources=. -Dsonar.host.url=${SONAR_HOST_URL} -Dsonar.login=${SONAR_TOKEN} -Dsonar.branch.name=$CI_COMMIT_BRANCH
